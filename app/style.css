@@ -3,16 +3,70 @@
     margin: 0;
 }
 
-main {
+body {
     display: flex;
     justify-content: center;
+    font-family:Arial, Helvetica, sans-serif
 }
 
-main > div {
+#display {
+    width: 100vmin;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    align-items: center;
+    margin-bottom: 7vmin;
+}
+
+#instructions {
+    width: 80vmin;
+    margin-top: 12vmin;
+    text-align: center;
+}
+
+h1 {
+    padding: 7vmin;
+    font-size: 7vmin;
+}
+
+#tokens {
+    display: flex;
+    justify-content: center;
+
+}
+
+#tokens > div {
     height: 12vmin;
+    max-height: 100px;
+    max-width: 100px;
     width: 12vmin;
     border: 1px solid black;
     border-radius: 50%;
-    margin: 1vmin;
+    margin: 1vmin;    
+}
+
+ol {
+    display: inline-block; 
+    text-align: left; 
+    padding: 5px 30px
+}
+
+p {
+    display: inline-block;
     
 }
+
+p, ol {
+    font-size: 20px;
+}
+
+
+button {
+    padding: 5vmin;
+    margin: 10vmin;
+    font-size: 5vmin;
+    border-radius: 25px;
+}
+
