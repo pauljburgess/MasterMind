@@ -1,0 +1,18 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+main > div {
+    height: 12vmin;
+    width: 12vmin;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin: 1vmin;
+    
+}
