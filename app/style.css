@@ -81,11 +81,32 @@ p, ol {
     border-radius: 50%;
 }
 
-#buttons {
-    
+.markers {
+    display: flex;
+}
+
+#guess-row {
+    margin-top: 25px;
+}
+
+#old-guess > .markers > div{
+    border: 1px solid black;
+    border-radius: 50%;
+    height: 6vmin;
+    width: 6vmin;
+    margin: 0 4vmin;
 
 }
 
-.guess {
-    
+.prev-guess {
+    display: flex;
+}
+
+#old-guess > .prev-guess > div{
+    margin: 1vmin;
+    height: 12vmin;
+    width: 12vmin;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-top: 15px;
 }
