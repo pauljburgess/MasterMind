@@ -50,11 +50,17 @@ Press play, choose a colour, and start guessing!
 ### **Future Updates**
 
 - [ ] Hard mode (Evaluations do not correspond to the position they are under)
-- [ ] Two player mode (Players go back and forth setting the sequence; the first to 50 guesses looses)
+- [ ] Two player mode (Players go back and forth setting the sequence; the first to 50 guesses loses)
 - [ ] Super Hard Mode (Multiples of the same colour are allowed)
 
 
 ---
+
+### Psuedocode
+ The Psuedocode for this project can be found [here](pseudocode.md)
+
+---
+
 
 ### **Credits**
 
