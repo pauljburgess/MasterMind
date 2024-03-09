@@ -27,13 +27,16 @@ const place = guessEL.addEventListener("click", placeToken)
 
 function colourSelect(evt) {
     if (evt.target.id === 'selection') {
-        let colourInHand = ''
+        colourInHand = ''
     } else {
-        let colourInHand = evt.target.id;
-    
-    console.log(colourInHand);
+        colourInHand = evt.target.id;
 }}
 
 function placeToken(evt) {
-    console.log(evt.target);
+    const rowID = document.getElementById(evt.target.id);
+    if (evt.target.id === "guess-row"){
+        return
+    } else {
+        rowID.style.backgroundColor = colourInHand;
+    }
 }
