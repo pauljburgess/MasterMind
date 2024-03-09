@@ -13,6 +13,10 @@ const colours = [
 
 /*----- state variables -----*/
 let colourInHand;
+let comparitor;
+let guessIdx;
+
+let guessRow = [0, 0, 0, 0, 0] //Move to init function later
 
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
@@ -29,8 +33,33 @@ function colourSelect(evt) {
     if (evt.target.id === 'selection') {
         colourInHand = ''
     } else {
-        colourInHand = evt.target.id;
-}}
+        colourInHand = evt.target.id;   
+    }
+
+    //Set the number to push into the guessRow array
+    if (evt.target.id === 'Black') {
+        comparitor = 1
+    } else if (evt.target.id === 'White'){
+        comparitor = 2
+    } else if (evt.target.id === 'Brown'){
+        comparitor = 3
+    } else if (evt.target.id === 'Red'){
+        comparitor = 4
+    } else if (evt.target.id === 'Orange'){
+        comparitor = 5
+    } else if (evt.target.id === 'Yellow'){
+        comparitor = 6
+    } else if (evt.target.id === 'Green'){
+        comparitor = 7
+    } else if (evt.target.id === 'Blue'){
+        comparitor = 8
+    }
+
+    console.log(comparitor);
+
+
+
+}
 
 function placeToken(evt) {
     const rowID = document.getElementById(evt.target.id);
@@ -39,4 +68,23 @@ function placeToken(evt) {
     } else {
         rowID.style.backgroundColor = colourInHand;
     }
+
+    //set the index of the guess array element
+    
+    
+    if (evt.target.id === 'first') {
+        guessIdx = 0
+    } else if (evt.target.id === 'second') {
+        guessIdx = 1
+    } else if (evt.target.id === 'third') {
+        guessIdx = 2
+    } else if (evt.target.id === 'fourth') {
+        guessIdx = 3
+    } else if (evt.target.id === 'fifth') {
+        guessIdx = 4 
+    }
+
+    guessRow[guessIdx] = comparitor
+    console.log(guessRow);
+
 }
