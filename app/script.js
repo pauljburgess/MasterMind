@@ -70,8 +70,6 @@ function placeToken(evt) {
     }
 
     //set the index of the guess array element
-    
-    
     if (evt.target.id === 'first') {
         guessIdx = 0
     } else if (evt.target.id === 'second') {
@@ -87,4 +85,7 @@ function placeToken(evt) {
     guessRow[guessIdx] = comparitor
     console.log(guessRow);
 
+    if (!guessRow.includes(0)) {
+        document.getElementById("guess-btn").style.visibility = 'visible';
+    }
 }
