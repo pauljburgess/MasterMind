@@ -15,8 +15,10 @@ const colours = [
 let colourInHand;
 let comparitor;
 let guessIdx;
+let guessRow = [0, 0, 0, 0, 0] //Move to init function later?
+let codeToGuess = [0, 0, 0, 0, 0];
 
-let guessRow = [0, 0, 0, 0, 0] //Move to init function later
+
 
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
@@ -28,6 +30,15 @@ const selection = selEl.addEventListener("click", colourSelect)
 const place = guessEL.addEventListener("click", placeToken)
 
 /*----- functions -----*/
+function setSecretCode() {
+    for (i=0; i<5; i++) {
+        let random = Math.floor(Math.random() * 7)
+        codeToGuess[i] = random;
+    }
+    console.log(codeToGuess);
+}
+
+setSecretCode();
 
 function colourSelect(evt) {
     if (evt.target.id === 'selection') {
@@ -54,11 +65,6 @@ function colourSelect(evt) {
     } else if (evt.target.id === 'Blue'){
         comparitor = 8
     }
-
-    console.log(comparitor);
-
-
-
 }
 
 function placeToken(evt) {
@@ -69,7 +75,6 @@ function placeToken(evt) {
         rowID.style.backgroundColor = colourInHand;
     }
 
-    //set the index of the guess array element
     if (evt.target.id === 'first') {
         guessIdx = 0
     } else if (evt.target.id === 'second') {
@@ -83,7 +88,6 @@ function placeToken(evt) {
     }
 
     guessRow[guessIdx] = comparitor
-    console.log(guessRow);
 
     if (!guessRow.includes(0)) {
         document.getElementById("guess-btn").style.visibility = 'visible';
