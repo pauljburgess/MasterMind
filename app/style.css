@@ -85,6 +85,8 @@ p, ol {
 
 .markers {
     display: flex;
+    justify-content: space-between;
+    margin: 0 3vmin;
 }
 
 #guess-row {
@@ -96,12 +98,14 @@ p, ol {
     border-radius: 50%;
     height: 6vmin;
     width: 6vmin;
-    margin: 0 4vmin;
+    max-height: 100px;
+    max-width: 100px;
 
 }
 
 .prev-guess {
     display: flex;
+    justify-content: space-between;
 }
 
 #old-guess > .prev-guess > div{
@@ -111,6 +115,9 @@ p, ol {
     border: 1px solid black;
     border-radius: 50%;
     margin-top: 15px;
+    margin-bottom: 3px;
+    max-height: 100px;
+    max-width: 100px;
 }
 
 #Black, #one {
