@@ -17,27 +17,36 @@ let comparitor;
 let guessIdx;
 let guessRow = [0, 0, 0, 0, 0] //Move to init function later?
 let codeToGuess = [0, 0, 0, 0, 0];
-
+let decoded = false;
 
 
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
 const guessEL = document.getElementById("guess-row")
+const guessBtn = document.getElementById("guess-btn")
 
 /*----- event listeners -----*/
 
-const selection = selEl.addEventListener("click", colourSelect)
-const place = guessEL.addEventListener("click", placeToken)
+selEl.addEventListener("click", colourSelect)
+guessEL.addEventListener("click", placeToken)
+guessBtn.addEventListener("click", results)
 
 /*----- functions -----*/
-function setSecretCode() {
-    for (i=0; i<5; i++) {
-        let random = Math.floor(Math.random() * 7)
-        codeToGuess[i] = random;
-    }
-    console.log(codeToGuess);
-}
 
+//Sets random code with no duplicates
+//Generates random number
+//If that number is not included in the random 
+function setSecretCode() {
+    while (codeToGuess.includes(0)) {
+        let random = (Math.floor(Math.random() * 8) + 1)
+        if (!codeToGuess.includes(random)) {
+            const zero = (el) => el < 1
+            let firstZero = codeToGuess.findIndex(zero);
+            codeToGuess[firstZero] = random
+            }
+        } 
+        console.log(codeToGuess);
+    }
 setSecretCode();
 
 function colourSelect(evt) {
@@ -90,6 +99,20 @@ function placeToken(evt) {
     guessRow[guessIdx] = comparitor
 
     if (!guessRow.includes(0)) {
-        document.getElementById("guess-btn").style.visibility = 'visible';
+        guessBtn.style.visibility = 'visible';
     }
+}
+
+function guess() {
+
+}
+
+function results() {
+    //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
+    if (guessRow.toString() === codeToGuess.toString()){
+        decoded = true
+    }
+    
+
+
 }
