@@ -21,7 +21,7 @@ let comparitor;
 let guessIdx;
 let decoded = false;
 let divIdMarker1 = 1;
-let divIdMarker2;
+let divIdMarker2 = 1;
 
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
@@ -50,7 +50,6 @@ function setSecretCode() {
             codeToGuess[firstZero] = random
             }
         } 
-        console.log(codeToGuess);
     }
 setSecretCode();
 
@@ -112,14 +111,13 @@ function placeToken(evt) {
 function compareCodes() {
     guessRow.forEach((el, idx) => {
          if(codeToGuess.includes(el) && idx === codeToGuess.indexOf(el)){
-            marker[idx] = "one"
+            marker[idx] = 1
          } else if (codeToGuess.includes(el) && idx !== codeToGuess.indexOf(el)) {
-            marker[idx] = "two"
+            marker[idx] = 2
          } else {
-            marker[idx] = "three"
+            marker[idx] = 3
          }
         });
-    console.log(marker)       
 }
 
 function createPreviousGuessDivs() {
@@ -136,7 +134,16 @@ function createMarkerDivs() {
     });
 }
 
+
+function resetGuessRowColours() {
+    guessRow.forEach(() => {
+        document
+    })
+}
+
+
 function results() {
+    console.log(guessRow)
     //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
     if (guessRow.toString() === codeToGuess.toString()){
         decoded = true
@@ -155,11 +162,16 @@ function results() {
     document.getElementById("old-guess").appendChild(markers).className = "markers";
 
     createPreviousGuessDivs();
-
     createMarkerDivs();
 
-    
     guessBtn.style.visibility = 'hidden';
+
     divIdMarker1 += 1;
     divIdMarker2 += 1;
+
+    colourInHand = 0
+    
+    guessRow = [0, 0, 0, 0, 0]
+    guessRow.style.backgroundColor = none;
+    console.log(guessRow)
 }

@@ -159,5 +159,15 @@ p, ol {
     background-color: rgba(168, 140, 78, 1);
 }
 
+.M-1 {
+    background-color: black;
+}
 
+.M-2 {
+    background-color: red;
+}
+
+.M-3 {
+    background-color: white;
+}
 
