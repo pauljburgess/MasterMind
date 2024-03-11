@@ -62,14 +62,14 @@ p, ol {
     font-size: 20px;
 }
 
-#play-btn, #guess-btn{
+#play-btn, #guess-btn, #replay-btn{
     padding: 5vmin;
     margin: 5vmin;
     font-size: 5vmin;
     border-radius: 25px;
 }
 
-#guess-btn {
+#guess-btn, #replay-btn {
     visibility: hidden;
 }
 

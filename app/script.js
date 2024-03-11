@@ -27,14 +27,17 @@ let divIdMarker2 = 1;
 
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
-const guessEL = document.getElementById("guess-row")
-const guessBtn = document.getElementById("guess-btn")
+const guessEL = document.getElementById("guess-row");
+const guessBtn = document.getElementById("guess-btn");
+const prevGuesses = document.getElementById("old-guess");
+const replayBtn = document.getElementById("replay-btn")
 
 /*----- event listeners -----*/
 
 selEl.addEventListener("click", colourSelect)
 guessEL.addEventListener("click", placeToken)
 guessBtn.addEventListener("click", results)
+replayBtn.addEventListener("Click", resetGame)
 
 /*----- functions -----*/
 
@@ -54,6 +57,21 @@ function setSecretCode() {
         } 
     }
 setSecretCode();
+
+function resetGame() {
+    guessRow = [0, 0, 0, 0, 0];
+    resetGuessRowColours();
+    setSecretCode();
+    removeOldGuesses();
+}
+
+//https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
+function removeOldGuesses() {
+    while (prevGuesses.lastChild){
+        prevGuesses.removeChild(prevGuesses.lastChild);
+    }
+}
+
 
 function colourSelect(evt) {
     if (evt.target.id === 'selection') {
@@ -144,16 +162,19 @@ function resetGuessRowColours() {
     })
 }
 
-
-function results() {
-    console.log(guessRow)
-    //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
+function winner() {
     if (guessRow.toString() === codeToGuess.toString()){
-        decoded = true
-        console.log ('We have a winner!')
-        return
+        replayBtn.style.visibility = "visible"
+        
     } 
 
+}
+
+
+
+function results() {
+    //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
+    winner()
     compareCodes()
 
     const oldGuess = document.createElement("div")
@@ -176,4 +197,6 @@ function results() {
     
     guessRow = [0, 0, 0, 0, 0]
     resetGuessRowColours()
+    console.log(decoded)
 }
+
