@@ -171,3 +171,8 @@ p, ol {
     background-color: transparent;
 }
 
+#winner {
+    visibility: hidden;
+    position: absolute;
+    margin-bottom: 45vmin;
+}

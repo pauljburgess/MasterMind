@@ -30,12 +30,18 @@ const selEl = document.getElementById("selection");
 const guessEL = document.getElementById("guess-row");
 const guessBtn = document.getElementById("guess-btn");
 const prevGuesses = document.getElementById("old-guess");
-const replayBtn = document.getElementById("replay-btn")
+const replayBtn = document.getElementById("replay-btn");
+const winnerBanner = document.getElementById("winner");
 
 /*----- event listeners -----*/
+function clickColours(){
+    selEl.addEventListener("click", colourSelect);
+}
 
-selEl.addEventListener("click", colourSelect)
-guessEL.addEventListener("click", placeToken)
+function clickGuess() {
+    guessEL.addEventListener("click", placeToken);
+}
+
 guessBtn.addEventListener("click", results)
 replayBtn.addEventListener("click", resetGame)
 
@@ -57,6 +63,8 @@ function setSecretCode() {
         } 
     }
 setSecretCode();
+clickColours();
+clickGuess();
 
 function resetGame() {
     guessRow = [0, 0, 0, 0, 0];
@@ -66,6 +74,9 @@ function resetGame() {
     removeOldGuesses();
     console.log(codeToGuess);
     replayBtn.style.visibility = 'hidden';
+    clickColours();
+    clickGuess();
+    winnerBanner.style.visibility = "hidden";
 }
 
 //https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
@@ -167,7 +178,10 @@ function resetGuessRowColours() {
 
 function winner() {
     if (guessRow.toString() === codeToGuess.toString()){
-        replayBtn.style.visibility = "visible"     
+        replayBtn.style.visibility = "visible";
+        selEl.removeEventListener("click", colourSelect);
+        guessEL.removeEventListener("click", placeToken);
+        winnerBanner.style.visibility = "visible";
     } 
 
 }
