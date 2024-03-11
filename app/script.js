@@ -11,6 +11,8 @@ const colours = {
     Blue : 'rgba(30, 181, 227, 1)',
 }
 
+const guessRowIds = ['first', 'second', 'third', 'fourth', 'fifth'];
+
 let codeToGuess = [0, 0, 0, 0, 0];
 let guessRow = [0, 0, 0, 0, 0] //Move to init function later?
 const marker = []
@@ -136,8 +138,9 @@ function createMarkerDivs() {
 
 
 function resetGuessRowColours() {
-    guessRow.forEach(() => {
-        document
+    guessRowIds.forEach((el) => {
+        const guessRowEl = document.getElementById(`${el}`)
+        guessRowEl.style.backgroundColor = 'transparent';
     })
 }
 
@@ -172,6 +175,5 @@ function results() {
     colourInHand = 0
     
     guessRow = [0, 0, 0, 0, 0]
-    guessRow.style.backgroundColor = none;
-    console.log(guessRow)
+    resetGuessRowColours()
 }
