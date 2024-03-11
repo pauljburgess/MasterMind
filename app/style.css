@@ -124,38 +124,40 @@ p, ol {
     max-width: 100px;
 }
 
-#Black, #one {
+#Black, #one, .C-1 {
     background-color: rgba(0, 0, 0, 1);
 }
-#White {
+#White, .C-2 {
     background-color: rgba(240, 240, 240, 1);
 
 }
 
-#Red, #three {
+#Red, #three, .C-4 {
     background-color: rgba(217, 0, 0, 1);
 }
 
-#Orange {
+#Orange, .C-5 {
     background-color: rgba(255, 136, 0, 1);
 }
 
-#Yellow, #two {
+#Yellow, #two, .C-6 {
     background-color: rgba(235, 238, 63, 1);
 
 }
 
-#Green, #five {
+#Green, #five, .C-7 {
     background-color: rgba(33, 128, 82, 1);
 
 }
 
-#Blue, #four {
+#Blue, #four, .C-8 {
     background-color: rgba(30, 181, 227, 1);
 
 }
 
-#Brown {
+#Brown, .C-3 {
     background-color: rgba(168, 140, 78, 1);
 }
+
+
 

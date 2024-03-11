@@ -1,24 +1,27 @@
 /*----- constants -----*/
 
-const colours = [
-    {Black : 'rgba(0, 0, 0, 1)'},
-    {White : 'rgba(240, 240, 240, 1)'},
-    {Brown : 'rgba(168, 140, 78, 1)'},
-    {Red : 'rgba(217, 0, 0, 1)'},
-    {Orange : 'rgba(255, 136, 0, 1)'},
-    {Yellow : 'rgba(235, 238, 63, 1)'},
-    {Green: 'rgba(33, 128, 82, 1)'},
-    {Blue : 'rgba(30, 181, 227, 1)'},
-]
+const colours = {
+    Black : 'rgba(0, 0, 0, 1)',
+    White : 'rgba(240, 240, 240, 1)',
+    Brown : 'rgba(168, 140, 78, 1)',
+    Red : 'rgba(217, 0, 0, 1)',
+    Orange : 'rgba(255, 136, 0, 1)',
+    Yellow : 'rgba(235, 238, 63, 1)',
+    Green: 'rgba(33, 128, 82, 1)',
+    Blue : 'rgba(30, 181, 227, 1)',
+}
+
+let codeToGuess = [0, 0, 0, 0, 0];
+let guessRow = [0, 0, 0, 0, 0] //Move to init function later?
+const marker = []
 
 /*----- state variables -----*/
 let colourInHand;
 let comparitor;
 let guessIdx;
-let guessRow = [0, 0, 0, 0, 0] //Move to init function later?
-let codeToGuess = [0, 0, 0, 0, 0];
 let decoded = false;
-
+let divIdMarker1 = 1;
+let divIdMarker2;
 
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
@@ -33,9 +36,11 @@ guessBtn.addEventListener("click", results)
 
 /*----- functions -----*/
 
-//Sets random code with no duplicates
-//Generates random number
-//If that number is not included in the random 
+//Sets random code with no duplicates by:
+//Generating a random number between 1-8 inclusive
+//If that number is not included in the codeToGuess array,
+//it finds the first 0 in the array and sets that zero to the random number.
+//It continues to do this while the codeToGuess array contains zeroes
 function setSecretCode() {
     while (codeToGuess.includes(0)) {
         let random = (Math.floor(Math.random() * 8) + 1)
@@ -53,7 +58,7 @@ function colourSelect(evt) {
     if (evt.target.id === 'selection') {
         colourInHand = ''
     } else {
-        colourInHand = evt.target.id;   
+        colourInHand = colours[evt.target.id];   
     }
 
     //Set the number to push into the guessRow array
@@ -101,18 +106,60 @@ function placeToken(evt) {
     if (!guessRow.includes(0)) {
         guessBtn.style.visibility = 'visible';
     }
+
 }
 
-function guess() {
+function compareCodes() {
+    guessRow.forEach((el, idx) => {
+         if(codeToGuess.includes(el) && idx === codeToGuess.indexOf(el)){
+            marker[idx] = "one"
+         } else if (codeToGuess.includes(el) && idx !== codeToGuess.indexOf(el)) {
+            marker[idx] = "two"
+         } else {
+            marker[idx] = "three"
+         }
+        });
+    console.log(marker)       
+}
 
+function createPreviousGuessDivs() {
+    guessRow.forEach((el) => {
+        const guessToken = document.createElement("div")
+        document.getElementById(`A-${divIdMarker1}`).appendChild(guessToken).className = `C-${el}`;
+    });
+}
+
+function createMarkerDivs() {
+    marker.forEach((el) => {
+        const markerToken = document.createElement("div")
+        document.getElementById(`B-${divIdMarker2}`).appendChild(markerToken).className = `M-${el}`;
+    });
 }
 
 function results() {
     //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
     if (guessRow.toString() === codeToGuess.toString()){
         decoded = true
-    }
+        console.log ('We have a winner!')
+        return
+    } 
+
+    compareCodes()
+
+    const oldGuess = document.createElement("div")
+    oldGuess.setAttribute("id", `A-${divIdMarker1}`)
+    document.getElementById("old-guess").appendChild(oldGuess).className = "prev-guess";
+
+    const markers = document.createElement("div")
+    markers.setAttribute("id", `B-${divIdMarker2}`)
+    document.getElementById("old-guess").appendChild(markers).className = "markers";
+
+    createPreviousGuessDivs();
+
+    createMarkerDivs();
+
     
-
-
+    guessBtn.style.visibility = 'hidden';
+    divIdMarker1 += 1;
+    divIdMarker2 += 1;
 }
