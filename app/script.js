@@ -63,6 +63,8 @@ function setSecretCode() {
             }
         } 
     }
+
+
 setSecretCode();
 clickColours();
 clickGuess();
@@ -142,7 +144,8 @@ function placeToken(evt) {
     if (!guessRow.includes(0)) {
         guessBtn.style.visibility = 'visible';
     }
-
+    colourInHand = 0;
+    comparitor = 0;
 }
 
 function compareCodes() {

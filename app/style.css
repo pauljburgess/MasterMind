@@ -4,7 +4,7 @@
 }
 
 body {
-    height: 100vh;
+    height: 100vh; 
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
@@ -101,17 +101,16 @@ p, ol {
 #old-guess {
     display: flex;
     flex-direction: column-reverse;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 #old-guess > .markers > div{
     border: 1px solid black;
     border-radius: 50%;
-    height: 6vmin;
-    width: 6vmin;
+    height:5vmin;
+    width: 5vmin;
     max-height: 30px;
     max-width: 30px;
-
 }
 
 .prev-guess {
@@ -134,9 +133,9 @@ p, ol {
 #Black, #one, .C-1 {
     background-color: rgba(0, 0, 0, 1);
 }
+
 #White, .C-2 {
     background-color: rgba(240, 240, 240, 1);
-
 }
 
 #Red, #three, .C-4 {
@@ -192,8 +191,40 @@ p, ol {
     }
 
     #instructions {
-    width: 80vmin;
-    margin-bottom: 20vmin;
-    text-align: center;
+        width: 80vmin;
+        margin-bottom: 20vmin;
+        text-align: center;
 }
+}
+
+#Black:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#White:hover {
+    background-color: rgba(240, 240, 240, 0.5);
+}
+
+#Brown:hover {
+    background-color: rgba(168, 140, 78, 0.5);
+}
+
+#Red:hover {
+    background-color: rgba(217, 0, 0, 0.5);
+}
+
+#Orange:hover {
+    background-color: rgba(255, 136, 0, 0.5);
+}
+
+#Yellow:hover {
+    background-color: rgba(235, 238, 63, 0.5);
+}
+
+#Green:hover {
+    background-color: rgba(33, 128, 82, 0.5);
+}
+
+#Blue:hover {
+    background-color: rgba(30, 181, 227, 0.5);
 }
