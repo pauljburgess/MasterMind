@@ -68,6 +68,7 @@ clickGuess();
 
 function resetGame() {
     guessRow = [0, 0, 0, 0, 0];
+    codeToGuess = [0, 0, 0, 0, 0];
     console.log(guessRow);
     resetGuessRowColours();
     setSecretCode();
@@ -76,7 +77,8 @@ function resetGame() {
     replayBtn.style.visibility = 'hidden';
     clickColours();
     clickGuess();
-    winnerBanner.style.visibility = "hidden";
+    winnerBanner.style.visibility = "hidden";        
+    guessEL.style.visibility = "visible";
 }
 
 //https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
@@ -177,19 +179,19 @@ function resetGuessRowColours() {
 }
 
 function winner() {
+    //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
     if (guessRow.toString() === codeToGuess.toString()){
         replayBtn.style.visibility = "visible";
         selEl.removeEventListener("click", colourSelect);
         guessEL.removeEventListener("click", placeToken);
         winnerBanner.style.visibility = "visible";
+        guessEL.style.visibility = "hidden";
     } 
-
 }
 
 
-
 function results() {
-    //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
+  
     winner()
     compareCodes()
 
