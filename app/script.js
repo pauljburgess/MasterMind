@@ -32,6 +32,7 @@ const guessBtn = document.getElementById("guess-btn");
 const prevGuesses = document.getElementById("old-guess");
 const replayBtn = document.getElementById("replay-btn");
 const winnerBanner = document.getElementById("winner");
+const oldGuessEl = document.getElementById("old-guess");
 
 /*----- event listeners -----*/
 function clickColours(){
@@ -197,11 +198,11 @@ function results() {
 
     const oldGuess = document.createElement("div")
     oldGuess.setAttribute("id", `A-${divIdMarker1}`)
-    document.getElementById("old-guess").appendChild(oldGuess).className = "prev-guess";
+    oldGuessEl.insertBefore(oldGuess, oldGuessEl.firstChild).className = "prev-guess";
 
     const markers = document.createElement("div")
     markers.setAttribute("id", `B-${divIdMarker2}`)
-    document.getElementById("old-guess").appendChild(markers).className = "markers";
+    oldGuessEl.insertBefore(markers, oldGuessEl.firstChild).className = "markers";
 
     createPreviousGuessDivs();
     createMarkerDivs();
