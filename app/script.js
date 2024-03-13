@@ -31,6 +31,7 @@ const guessBtn = document.getElementById("guess-btn");
 const prevGuesses = document.getElementById("old-guess");
 const replayBtn = document.getElementById("replay-btn");
 const winnerBanner = document.getElementById("winner");
+const defeatBanner = document.getElementById("defeat");
 const oldGuessEl = document.getElementById("old-guess");
 
 /*----- event listeners -----*/
@@ -211,12 +212,23 @@ function winner() {
     }
 }
 
+function defeat() {
+    if (guessCounter === 12 && guessRow.toString() !== codeToGuess.toString()){
+        replayBtn.style.visibility = "visible";
+        selEl.removeEventListener("click", colourSelect);
+        guessEL.removeEventListener("click", placeToken);
+        defeatBanner.style.visibility = "visible";
+        guessEL.style.visibility = "hidden";
+    }
+}
+
 
 function results() {
 
     winner()
     compareCodes()
     fillRow()
+    defeat()
 
 
     guessBtn.style.visibility = 'hidden';
