@@ -4,11 +4,11 @@
 }
 
 body {
-    height: 100vh; 
+    height: 100vh;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: rgba(142, 71, 53, 1);
 }
 
@@ -32,12 +32,14 @@ h1 {
     font-size: 7vmin;
 }
 
-#tokens, #guess-row {
+#tokens,
+#guess-row {
     display: flex;
     justify-content: center;
 }
 
-#tokens > div, #guess-row > div {
+#tokens>div,
+#guess-row>div {
     height: 12vmin;
     max-height: 75px;
     max-width: 75px;
@@ -48,8 +50,8 @@ h1 {
 }
 
 ol {
-    display: inline-block; 
-    text-align: left; 
+    display: inline-block;
+    text-align: left;
     padding: 5px 30px
 }
 
@@ -57,7 +59,8 @@ p {
     display: inline-block;
 }
 
-p, ol {
+p,
+ol {
     font-size: 20px;
 }
 
@@ -65,13 +68,16 @@ p, ol {
     margin-bottom: 10px;
 }
 
-#play-btn, #guess-btn, #replay-btn{
+#play-btn,
+#guess-btn,
+#replay-btn {
     padding: 2vmin 7vmin;
     font-size: 5vmin;
     border-radius: 25px;
 }
 
-#guess-btn, #replay-btn {
+#guess-btn,
+#replay-btn {
     visibility: hidden;
 }
 
@@ -81,7 +87,7 @@ p, ol {
     margin-bottom: 4vmin;
 }
 
-#selection > div {
+#selection>div {
     margin: 1vmin;
     height: 10vmin;
     width: 10vmin;
@@ -106,11 +112,11 @@ p, ol {
     display: flex;
 }
 
-.markers > div{
+.markers>div {
     margin-left: 1px;
     border: 1px solid black;
     border-radius: 50%;
-    height:4vmin;
+    height: 4vmin;
     width: 4vmin;
     max-height: 30px;
     max-width: 30px;
@@ -123,7 +129,7 @@ p, ol {
     margin: 5px;
 }
 
-.old-guess > div{
+.old-guess>div {
     margin-left: 1px;
     height: 9vmin;
     width: 9vmin;
@@ -133,37 +139,50 @@ p, ol {
     max-width: 75px;
 }
 
-#Black, #one, .C-1 {
+#Black,
+#one,
+.C-1 {
     background-color: rgba(0, 0, 0, 1);
 }
 
-#White, .C-2 {
+#White,
+.C-2 {
     background-color: rgba(240, 240, 240, 1);
 }
 
-#Brown, .C-3 {
+#Brown,
+.C-3 {
     background-color: rgba(168, 140, 78, 1);
 }
 
-#Red, #three, .C-4 {
+#Red,
+#three,
+.C-4 {
     background-color: rgba(217, 0, 0, 1);
 }
 
-#Orange, .C-5 {
+#Orange,
+.C-5 {
     background-color: rgba(255, 136, 0, 1);
 }
 
-#Yellow, #two, .C-6 {
+#Yellow,
+#two,
+.C-6 {
     background-color: rgba(235, 238, 63, 1);
 
 }
 
-#Green, #five, .C-7 {
+#Green,
+#five,
+.C-7 {
     background-color: rgba(33, 128, 82, 1);
 
 }
 
-#Blue, #four, .C-8 {
+#Blue,
+#four,
+.C-8 {
     background-color: rgba(30, 181, 227, 1);
 
 }
@@ -194,7 +213,9 @@ p, ol {
 
 
 @media only screen and (min-width: 40em) {
-    #guess-btn, #replay-btn{
+
+    #guess-btn,
+    #replay-btn {
         padding: 20px;
         margin: 3vmin;
     }

@@ -1,14 +1,14 @@
 /*----- constants -----*/
 
 const colours = {
-    Black : 'rgba(0, 0, 0, 1)',
-    White : 'rgba(240, 240, 240, 1)',
-    Brown : 'rgba(168, 140, 78, 1)',
-    Red : 'rgba(217, 0, 0, 1)',
-    Orange : 'rgba(255, 136, 0, 1)',
-    Yellow : 'rgba(235, 238, 63, 1)',
+    Black: 'rgba(0, 0, 0, 1)',
+    White: 'rgba(240, 240, 240, 1)',
+    Brown: 'rgba(168, 140, 78, 1)',
+    Red: 'rgba(217, 0, 0, 1)',
+    Orange: 'rgba(255, 136, 0, 1)',
+    Yellow: 'rgba(235, 238, 63, 1)',
     Green: 'rgba(33, 128, 82, 1)',
-    Blue : 'rgba(30, 181, 227, 1)',
+    Blue: 'rgba(30, 181, 227, 1)',
 }
 
 const guessRowIds = ['first', 'second', 'third', 'fourth', 'fifth'];
@@ -22,8 +22,6 @@ let colourInHand;
 let comparitor;
 let guessIdx;
 let decoded = false;
-let divIdMarker1 = 1;
-let divIdMarker2 = 1;
 let guessCounter = 1;
 
 /*----- cached elements  -----*/
@@ -36,7 +34,7 @@ const winnerBanner = document.getElementById("winner");
 const oldGuessEl = document.getElementById("old-guess");
 
 /*----- event listeners -----*/
-function clickColours(){
+function clickColours() {
     selEl.addEventListener("click", colourSelect);
 }
 
@@ -61,9 +59,9 @@ function setSecretCode() {
             const zero = (el) => el < 1
             let firstZero = codeToGuess.findIndex(zero);
             codeToGuess[firstZero] = random
-            }
-        } 
+        }
     }
+}
 
 
 setSecretCode();
@@ -73,23 +71,30 @@ clickGuess();
 function resetGame() {
     guessRow = [0, 0, 0, 0, 0];
     codeToGuess = [0, 0, 0, 0, 0];
-    console.log(guessRow);
     resetGuessRowColours();
     setSecretCode();
-    removeOldGuesses();
-    console.log(codeToGuess);
+    boardReset();
     replayBtn.style.visibility = 'hidden';
     clickColours();
     clickGuess();
-    winnerBanner.style.visibility = "hidden";        
+    winnerBanner.style.visibility = "hidden";
     guessEL.style.visibility = "visible";
 }
 
-//https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
-function removeOldGuesses() {
-    while (prevGuesses.firstChild){
-        prevGuesses.removeChild(prevGuesses.lastChild);
+
+function boardReset() {
+    const clearEls = document.querySelectorAll('div.old-guess > div');
+    const clearMarkerEls = document.querySelectorAll('div.markers > div');
+
+    clearEls.forEach((el) => {
+        el.removeAttribute("class");
     }
+    )
+
+    clearMarkerEls.forEach((el) => {
+        el.removeAttribute("class");
+    }
+    )
 }
 
 
@@ -97,32 +102,32 @@ function colourSelect(evt) {
     if (evt.target.id === 'selection') {
         colourInHand = ''
     } else {
-        colourInHand = colours[evt.target.id];   
+        colourInHand = colours[evt.target.id];
     }
 
     //Set the number to push into the guessRow array
     if (evt.target.id === 'Black') {
         comparitor = 1
-    } else if (evt.target.id === 'White'){
+    } else if (evt.target.id === 'White') {
         comparitor = 2
-    } else if (evt.target.id === 'Brown'){
+    } else if (evt.target.id === 'Brown') {
         comparitor = 3
-    } else if (evt.target.id === 'Red'){
+    } else if (evt.target.id === 'Red') {
         comparitor = 4
-    } else if (evt.target.id === 'Orange'){
+    } else if (evt.target.id === 'Orange') {
         comparitor = 5
-    } else if (evt.target.id === 'Yellow'){
+    } else if (evt.target.id === 'Yellow') {
         comparitor = 6
-    } else if (evt.target.id === 'Green'){
+    } else if (evt.target.id === 'Green') {
         comparitor = 7
-    } else if (evt.target.id === 'Blue'){
+    } else if (evt.target.id === 'Blue') {
         comparitor = 8
     }
 }
 
 function placeToken(evt) {
     const rowID = document.getElementById(evt.target.id);
-    if (evt.target.id === "guess-row"){
+    if (evt.target.id === "guess-row") {
         return
     } else {
         rowID.style.backgroundColor = colourInHand;
@@ -137,7 +142,7 @@ function placeToken(evt) {
     } else if (evt.target.id === 'fourth') {
         guessIdx = 3
     } else if (evt.target.id === 'fifth') {
-        guessIdx = 4 
+        guessIdx = 4
     }
 
     guessRow[guessIdx] = comparitor
@@ -151,14 +156,14 @@ function placeToken(evt) {
 
 function compareCodes() {
     guessRow.forEach((el, idx) => {
-         if(codeToGuess.includes(el) && idx === codeToGuess.indexOf(el)){
+        if (codeToGuess.includes(el) && idx === codeToGuess.indexOf(el)) {
             marker[idx] = 1
-         } else if (codeToGuess.includes(el) && idx !== codeToGuess.indexOf(el)) {
+        } else if (codeToGuess.includes(el) && idx !== codeToGuess.indexOf(el)) {
             marker[idx] = 2
-         } else {
+        } else {
             marker[idx] = 3
-         }
-        });
+        }
+    });
 }
 
 function createPreviousGuessDivs() {
@@ -197,30 +202,30 @@ function resetGuessRowColours() {
 
 function winner() {
     //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
-    if (guessRow.toString() === codeToGuess.toString()){
+    if (guessRow.toString() === codeToGuess.toString()) {
         replayBtn.style.visibility = "visible";
         selEl.removeEventListener("click", colourSelect);
         guessEL.removeEventListener("click", placeToken);
         winnerBanner.style.visibility = "visible";
         guessEL.style.visibility = "hidden";
-    } 
+    }
 }
 
 
 function results() {
-  
+
     winner()
     compareCodes()
     fillRow()
-  
+
 
     guessBtn.style.visibility = 'hidden';
 
-    
+
 
     guessCounter += 1;
     colourInHand = 0;
-    
+
     guessRow = [0, 0, 0, 0, 0]
     resetGuessRowColours()
 }
