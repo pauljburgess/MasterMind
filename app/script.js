@@ -13,7 +13,7 @@ const colours = {
 
 const guessRowIds = ['first', 'second', 'third', 'fourth', 'fifth'];
 
-let codeToGuess = [0, 0, 0, 0, 0];
+let secretCode = [0, 0, 0, 0, 0];
 let guessRow = [0, 0, 0, 0, 0] //Move to init function later?
 const marker = []
 
@@ -23,7 +23,7 @@ let comparitor;
 let guessIdx;
 let decoded = false;
 let guessCounter = 1;
-
+let hardMode = false;
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
 const guessEL = document.getElementById("guess-row");
@@ -50,16 +50,16 @@ replayBtn.addEventListener("click", resetGame)
 
 //Sets random code with no duplicates by:
 //Generating a random number between 1-8 inclusive
-//If that number is not included in the codeToGuess array,
+//If that number is not included in the secretCode array,
 //it finds the first 0 in the array and sets that zero to the random number.
-//It continues to do this while the codeToGuess array contains zeroes
+//It continues to do this while the secretCode array contains zeroes
 function setSecretCode() {
-    while (codeToGuess.includes(0)) {
+    while (secretCode.includes(0)) {
         let random = (Math.floor(Math.random() * 8) + 1)
-        if (!codeToGuess.includes(random)) {
+        if (!secretCode.includes(random)) {
             const zero = (el) => el < 1
-            let firstZero = codeToGuess.findIndex(zero);
-            codeToGuess[firstZero] = random
+            let firstZero = secretCode.findIndex(zero);
+            secretCode[firstZero] = random
         }
     }
 }
@@ -69,9 +69,10 @@ setSecretCode();
 clickColours();
 clickGuess();
 
+
 function resetGame() {
     guessRow = [0, 0, 0, 0, 0];
-    codeToGuess = [0, 0, 0, 0, 0];
+    secretCode = [0, 0, 0, 0, 0];
     resetGuessRowColours();
     setSecretCode();
     boardReset();
@@ -106,7 +107,6 @@ function colourSelect(evt) {
         colourInHand = colours[evt.target.id];
     }
 
-    //Set the number to push into the guessRow array
     if (evt.target.id === 'Black') {
         comparitor = 1
     } else if (evt.target.id === 'White') {
@@ -157,27 +157,13 @@ function placeToken(evt) {
 
 function compareCodes() {
     guessRow.forEach((el, idx) => {
-        if (codeToGuess.includes(el) && idx === codeToGuess.indexOf(el)) {
+        if (secretCode.includes(el) && idx === secretCode.indexOf(el)) {
             marker[idx] = 1
-        } else if (codeToGuess.includes(el) && idx !== codeToGuess.indexOf(el)) {
+        } else if (secretCode.includes(el) && idx !== secretCode.indexOf(el)) {
             marker[idx] = 2
         } else {
             marker[idx] = 3
         }
-    });
-}
-
-function createPreviousGuessDivs() {
-    guessRow.forEach((el) => {
-        const guessToken = document.createElement("div")
-        document.getElementById(`A-${divIdMarker1}`).appendChild(guessToken).className = `C-${el}`;
-    });
-}
-
-function createMarkerDivs() {
-    marker.forEach((el) => {
-        const markerToken = document.createElement("div")
-        document.getElementById(`B-${divIdMarker2}`).appendChild(markerToken).className = `M-${el}`;
     });
 }
 
@@ -187,10 +173,18 @@ function fillRow() {
         guessTokenEl.className = `C-${el}`
     })
 
-    marker.forEach((el, idx) => {
-        const markTokenEl = document.getElementById(`MKT-${guessCounter}-${idx}`)
-        markTokenEl.className = `M-${el}`;
-    })
+    if (hardMode === true) {
+        const sortedMarkers = marker.toSorted();
+        sortedMarkers.forEach((el, idx) => {
+            const markTokenEl = document.getElementById(`MKT-${guessCounter}-${idx}`)
+            markTokenEl.className = `M-${el}`;
+        })
+    } else if (hardMode === false) {
+        marker.forEach((el, idx) => {
+            const markTokenEl = document.getElementById(`MKT-${guessCounter}-${idx}`)
+            markTokenEl.className = `M-${el}`;
+        })
+    }
 }
 
 
@@ -203,7 +197,7 @@ function resetGuessRowColours() {
 
 function winner() {
     //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
-    if (guessRow.toString() === codeToGuess.toString()) {
+    if (guessRow.toString() === secretCode.toString()) {
         replayBtn.style.visibility = "visible";
         selEl.removeEventListener("click", colourSelect);
         guessEL.removeEventListener("click", placeToken);
@@ -213,7 +207,7 @@ function winner() {
 }
 
 function defeat() {
-    if (guessCounter === 12 && guessRow.toString() !== codeToGuess.toString()){
+    if (guessCounter === 12 && guessRow.toString() !== secretCode.toString()) {
         replayBtn.style.visibility = "visible";
         selEl.removeEventListener("click", colourSelect);
         guessEL.removeEventListener("click", placeToken);
@@ -224,20 +218,13 @@ function defeat() {
 
 
 function results() {
-
     winner()
     compareCodes()
     fillRow()
     defeat()
-
-
     guessBtn.style.visibility = 'hidden';
-
-
-
     guessCounter += 1;
     colourInHand = 0;
-
     guessRow = [0, 0, 0, 0, 0]
     resetGuessRowColours()
 }
