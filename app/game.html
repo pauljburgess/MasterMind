@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <script defer src="script.js"></script>
-    <title>Document</title>
+    <title>MasterMind</title>
 </head>
+
 <body>
     <section id="selection">
         <div id="Black"></div>
@@ -19,11 +21,6 @@
         <div id="Blue"></div>
     </section>
 
-    <section id="buttons">
-        <button id="replay-btn">Replay</button>
-        <button id="guess-btn">Guess</button>
-    </section>
-
     <section id="guess-row">
         <div id="first"></div>
         <div id="second"></div>
@@ -32,11 +29,224 @@
         <div id="fifth"></div>
     </section>
 
-    <section id="old-guess">
-       
+    <section id="buttons">
+        <button id="replay-btn">Replay</button>
+        <button id="guess-btn">Guess</button>
     </section>
-    
+
+
+    <section id="board">
+        <div class="marked-guess" id="MG12">
+            <div class="old-guess" id="OG12">
+                <div id="OGT-12-0"></div>
+                <div id="OGT-12-1"></div>
+                <div id="OGT-12-2"></div>
+                <div id="OGT-12-3"></div>
+                <div id="OGT-12-4"></div>
+            </div>
+
+            <div class="markers" id="MK12">
+                <div id="MKT-12-0"></div>
+                <div id="MKT-12-1"></div>
+                <div id="MKT-12-2"></div>
+                <div id="MKT-12-3"></div>
+                <div id="MKT-12-4"></div>
+            </div>
+        </div>
+
+        <div class="marked-guess" id="MG11">
+            <div class="old-guess" id="OG11">
+                <div id="OGT-11-0"></div>
+                <div id="OGT-11-1"></div>
+                <div id="OGT-11-2"></div>
+                <div id="OGT-11-3"></div>
+                <div id="OGT-11-4"></div>
+            </div>
+
+            <div class="markers" id="MK11">
+                <div id="MKT-11-0"></div>
+                <div id="MKT-11-1"></div>
+                <div id="MKT-11-2"></div>
+                <div id="MKT-11-3"></div>
+                <div id="MKT-11-4"></div>
+            </div>
+        </div>
+
+        <div class="marked-guess" id="MG10">
+            <div class="old-guess" id="OG10">
+                <div id="OGT-10-0"></div>
+                <div id="OGT-10-1"></div>
+                <div id="OGT-10-2"></div>
+                <div id="OGT-10-3"></div>
+                <div id="OGT-10-4"></div>
+            </div>
+
+            <div class="markers" id="MK10">
+                <div id="MKT-10-0"></div>
+                <div id="MKT-10-1"></div>
+                <div id="MKT-10-2"></div>
+                <div id="MKT-10-3"></div>
+                <div id="MKT-10-4"></div>
+            </div>
+        </div>
+        <div class="marked-guess" id="MG9">
+            <div class="old-guess" id="OG9">
+                <div id="OGT-9-0"></div>
+                <div id="OGT-9-1"></div>
+                <div id="OGT-9-2"></div>
+                <div id="OGT-9-3"></div>
+                <div id="OGT-9-4"></div>
+            </div>
+
+            <div class="markers" id="MK9">
+                <div  id="MKT-9-0"></div>
+                <div  id="MKT-9-1"></div>
+                <div  id="MKT-9-2"></div>
+                <div  id="MKT-9-3"></div>
+                <div  id="MKT-9-4"></div>
+            </div>
+        </div>
+        <div class="marked-guess" id="MG8">
+            <div class="old-guess" id="OG8">
+                <div id="OGT-8-0"></div>
+                <div id="OGT-8-1"></div>
+                <div id="OGT-8-2"></div>
+                <div id="OGT-8-3"></div>
+                <div id="OGT-8-4"></div>
+            </div>
+
+            <div class="markers" id="MK8">
+                <div id="MKT-8-0"></div>
+                <div id="MKT-8-1"></div>
+                <div id="MKT-8-2"></div>
+                <div id="MKT-8-3"></div>
+                <div id="MKT-8-4"></div>
+            </div>
+        </div>
+        <div class="marked-guess" id="MG7">
+            <div class="old-guess" id="OG7">
+                <div id="OGT-7-0"></div>
+                <div id="OGT-7-1"></div>
+                <div id="OGT-7-2"></div>
+                <div id="OGT-7-3"></div>
+                <div id="OGT-7-4"></div>
+            </div>
+
+            <div class="markers" id="MK7">
+                <div id="MKT-7-0"></div>
+                <div id="MKT-7-1"></div>
+                <div id="MKT-7-2"></div>
+                <div id="MKT-7-3"></div>
+                <div id="MKT-7-4"></div>
+            </div>
+        </div>
+        <div class="marked-guess" id="MG6">
+            <div class="old-guess" id="OG6">
+                <div id="OGT-6-0"></div>
+                <div id="OGT-6-1"></div>
+                <div id="OGT-6-2"></div>
+                <div id="OGT-6-3"></div>
+                <div id="OGT-6-4"></div>
+            </div>
+
+            <div class="markers" id="MK6">
+                <div id="MKT-6-0"></div>
+                <div id="MKT-6-1"></div>
+                <div id="MKT-6-2"></div>
+                <div id="MKT-6-3"></div>
+                <div id="MKT-6-4"></div>
+            </div>
+        </div>
+        <div class="marked-guess" id="MG5">
+            <div class="old-guess" id="OG5">
+                <div id="OGT-5-0"></div>
+                <div id="OGT-5-1"></div>
+                <div id="OGT-5-2"></div>
+                <div id="OGT-5-3"></div>
+                <div id="OGT-5-4"></div>
+            </div>
+
+            <div class="markers" id="MK5">
+                <div id="MKT-5-0"></div>
+                <div id="MKT-5-1"></div>
+                <div id="MKT-5-2"></div>
+                <div id="MKT-5-3"></div>
+                <div id="MKT-5-4"></div>
+            </div>
+        </div>
+        <div class="marked-guess" id="MG4">
+            <div class="old-guess" id="OG4">
+                <div id="OGT-4-0"></div>
+                <div id="OGT-4-1"></div>
+                <div id="OGT-4-2"></div>
+                <div id="OGT-4-3"></div>
+                <div id="OGT-4-4"></div>
+            </div>
+
+            <div class="markers" id="MK4">
+                <div id="MKT-4-0"></div>
+                <div id="MKT-4-1"></div>
+                <div id="MKT-4-2"></div>
+                <div id="MKT-4-3"></div>
+                <div id="MKT-4-4"></div>
+            </div>
+        </div>
+        <div class="marked-guess" id="MG3">
+            <div class="old-guess" id="OG3">
+                <div id="OGT-3-0"></div>
+                <div id="OGT-3-1"></div>
+                <div id="OGT-3-2"></div>
+                <div id="OGT-3-3"></div>
+                <div id="OGT-3-4"></div>
+            </div>
+
+            <div class="markers" id="MK3">
+                <div id="MKT-3-0"></div>
+                <div id="MKT-3-1"></div>
+                <div id="MKT-3-2"></div>
+                <div id="MKT-3-3"></div>
+                <div id="MKT-3-4"></div>
+            </div>
+        </div>
+        <div class="marked-guess" id="MG2">
+            <div class="old-guess" id="OG2">
+                <div id="OGT-2-0"></div>
+                <div id="OGT-2-1"></div>
+                <div id="OGT-2-2"></div>
+                <div id="OGT-2-3"></div>
+                <div id="OGT-2-4"></div>
+            </div>
+
+            <div class="markers" id="MK2">
+                <div id="MKT-2-0"></div>
+                <div id="MKT-2-1"></div>
+                <div id="MKT-2-2"></div>
+                <div id="MKT-2-3"></div>
+                <div id="MKT-2-4"></div>
+            </div>
+        </div>
+
+        <div class="marked-guess" id="MG1">
+            <div class="old-guess" id="OG1">
+                <div id="OGT-1-0"></div>
+                <div id="OGT-1-1"></div>
+                <div id="OGT-1-2"></div>
+                <div id="OGT-1-3"></div>
+                <div id="OGT-1-4"></div>
+            </div>
+
+            <div class="markers" id="MK1">
+                <div id="MKT-1-0"></div>
+                <div id="MKT-1-1"></div>
+                <div id="MKT-1-2"></div>
+                <div id="MKT-1-3"></div>
+                <div id="MKT-1-4"></div>
+            </div>
+        </div>
+    </section>
+
     <div id="winner">WINNER!</div>
 
 </body>
+
 </html>

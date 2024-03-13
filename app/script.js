@@ -24,6 +24,7 @@ let guessIdx;
 let decoded = false;
 let divIdMarker1 = 1;
 let divIdMarker2 = 1;
+let guessCounter = 1;
 
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
@@ -174,6 +175,18 @@ function createMarkerDivs() {
     });
 }
 
+function fillRow() {
+    guessRow.forEach((el, idx) => {
+        const guessTokenEl = document.getElementById(`OGT-${guessCounter}-${idx}`)
+        guessTokenEl.className = `C-${el}`
+    })
+
+    marker.forEach((el, idx) => {
+        const markTokenEl = document.getElementById(`MKT-${guessCounter}-${idx}`)
+        markTokenEl.className = `M-${el}`;
+    })
+}
+
 
 function resetGuessRowColours() {
     guessRowIds.forEach((el) => {
@@ -198,23 +211,14 @@ function results() {
   
     winner()
     compareCodes()
-
-    const oldGuess = document.createElement("div")
-    oldGuess.setAttribute("id", `A-${divIdMarker1}`)
-    oldGuessEl.insertBefore(oldGuess, oldGuessEl.firstChild).className = "prev-guess";
-
-    const markers = document.createElement("div")
-    markers.setAttribute("id", `B-${divIdMarker2}`)
-    oldGuessEl.insertBefore(markers, oldGuessEl.firstChild).className = "markers";
-
-    createPreviousGuessDivs();
-    createMarkerDivs();
+    fillRow()
+  
 
     guessBtn.style.visibility = 'hidden';
 
-    divIdMarker1 += 1;
-    divIdMarker2 += 1;
+    
 
+    guessCounter += 1;
     colourInHand = 0;
     
     guessRow = [0, 0, 0, 0, 0]
