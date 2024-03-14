@@ -135,8 +135,8 @@ ol {
     width: 9vmin;
     border: 1px solid black;
     border-radius: 50%;
-    max-height: 75px;
-    max-width: 75px;
+    max-height: 65px;
+    max-width: 65px;
 }
 
 #Black,
@@ -216,4 +216,51 @@ ol {
 
 #defeat {
     background-color: rgb(37, 149, 35);
+}
+
+@media only screen and (min-width: 40em) {
+
+    #guess-btn,
+    #replay-btn {
+        padding: 20px;
+        margin: 3vmin;
+    }
+
+    #instructions {
+        width: 80vmin;
+        margin-bottom: 20vmin;
+        text-align: center;
+    }
+}
+
+#Black:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#White:hover {
+    background-color: rgba(240, 240, 240, 0.5);
+}
+
+#Brown:hover {
+    background-color: rgba(168, 140, 78, 0.5);
+}
+
+#Red:hover {
+    background-color: rgba(217, 0, 0, 0.5);
+}
+
+#Orange:hover {
+    background-color: rgba(255, 136, 0, 0.5);
+}
+
+#Yellow:hover {
+    background-color: rgba(235, 238, 63, 0.5);
+}
+
+#Green:hover {
+    background-color: rgba(33, 128, 82, 0.5);
+}
+
+#Blue:hover {
+    background-color: rgba(30, 181, 227, 0.5);
 }
