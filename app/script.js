@@ -24,6 +24,7 @@ let guessIdx;
 let decoded = false;
 let guessCounter = 1;
 let hardMode = false;
+
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
 const guessEL = document.getElementById("guess-row");
@@ -33,6 +34,9 @@ const replayBtn = document.getElementById("replay-btn");
 const winnerBanner = document.getElementById("winner");
 const defeatBanner = document.getElementById("defeat");
 const oldGuessEl = document.getElementById("old-guess");
+const selectLevel = document.getElementById("level-selection");
+const setBtn = document.getElementById("set-btn");
+
 
 /*----- event listeners -----*/
 function clickColours() {
@@ -43,16 +47,27 @@ function clickGuess() {
     guessEL.addEventListener("click", placeToken);
 }
 
-guessBtn.addEventListener("click", results)
-replayBtn.addEventListener("click", resetGame)
+guessBtn.addEventListener("click", results);
+replayBtn.addEventListener("click", resetGame);
+setBtn.addEventListener("click", setLevel);
+
 
 /*----- functions -----*/
 
-//Sets random code with no duplicates by:
-//Generating a random number between 1-8 inclusive
-//If that number is not included in the secretCode array,
-//it finds the first 0 in the array and sets that zero to the random number.
-//It continues to do this while the secretCode array contains zeroes
+function setLevel() {
+    if (document.querySelector('input[name="level"]:checked').value === 'easy'){
+        hardMode = false
+    } else if (document.querySelector('input[name="level"]:checked').value === 'hard') {
+        hardMode = true
+    }
+    
+    selectLevel.style.visibility = "hidden";
+    guessEL.style.visibility = "visible";
+    clickGuess();
+    clickColours();
+}
+
+
 function setSecretCode() {
     while (secretCode.includes(0)) {
         let random = (Math.floor(Math.random() * 8) + 1)
@@ -66,8 +81,6 @@ function setSecretCode() {
 
 
 setSecretCode();
-clickColours();
-clickGuess();
 
 
 function resetGame() {
@@ -77,10 +90,9 @@ function resetGame() {
     setSecretCode();
     boardReset();
     replayBtn.style.visibility = 'hidden';
-    clickColours();
-    clickGuess();
     winnerBanner.style.visibility = "hidden";
-    guessEL.style.visibility = "visible";
+    selectLevel.style.visibility = "visible";
+    guessCounter = 1;
 }
 
 
@@ -151,6 +163,7 @@ function placeToken(evt) {
     if (!guessRow.includes(0)) {
         guessBtn.style.visibility = 'visible';
     }
+    
     colourInHand = 0;
     comparitor = 0;
 }
