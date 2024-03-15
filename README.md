@@ -22,14 +22,13 @@ Depending on how many attempts it takes to guess the sequence, different funny m
 - HTML 
 - CSS
   - Flexbox
-  - Grid
 - JavaScript
 ---
 
 ### **Getting Started**
 
-Playing is simple: the game can be found at --LINK--
-Press play, choose a colour, and start guessing!
+Playing is simple: the game can be found at [--LINK--](https://m4st3rm1nd.surge.sh/game.html)
+Press play, pick a level, choose a colour, and start guessing!
 
 
 
@@ -49,7 +48,7 @@ Press play, choose a colour, and start guessing!
 
 ### **Future Updates**
 
-- [ ] Hard mode (Evaluations do not correspond to the position they are under)
+- [x] Hard mode (Evaluations do not correspond to the position they are under)
 - [ ] Two player mode (Players go back and forth setting the sequence; the first to 50 guesses loses)
 - [ ] Super Hard Mode (Multiples of the same colour are allowed)
 
