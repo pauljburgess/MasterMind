@@ -55,12 +55,12 @@ setBtn.addEventListener("click", setLevel);
 /*----- functions -----*/
 
 function setLevel() {
-    if (document.querySelector('input[name="level"]:checked').value === 'easy'){
+    if (document.querySelector('input[name="level"]:checked').value === 'easy') {
         hardMode = false
     } else if (document.querySelector('input[name="level"]:checked').value === 'hard') {
         hardMode = true
     }
-    
+
     selectLevel.style.visibility = "hidden";
     guessEL.style.visibility = "visible";
     clickGuess();
@@ -163,7 +163,7 @@ function placeToken(evt) {
     if (!guessRow.includes(0)) {
         guessBtn.style.visibility = 'visible';
     }
-    
+
     colourInHand = 0;
     comparitor = 0;
 }

@@ -195,7 +195,8 @@ ol {
     background-color: transparent;
 }
 
-#winner, #defeat {
+#winner,
+#defeat {
     visibility: hidden;
     position: absolute;
     top: 30%;
