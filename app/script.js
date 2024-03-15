@@ -1,5 +1,4 @@
 /*----- constants -----*/
-
 const colours = {
     Black: 'rgba(0, 0, 0, 1)',
     White: 'rgba(240, 240, 240, 1)',
@@ -13,10 +12,6 @@ const colours = {
 
 const guessRowIds = ['first', 'second', 'third', 'fourth', 'fifth'];
 
-let secretCode = [0, 0, 0, 0, 0];
-let guessRow = [0, 0, 0, 0, 0] //Move to init function later?
-const marker = []
-
 /*----- state variables -----*/
 let colourInHand;
 let comparitor;
@@ -24,6 +19,9 @@ let guessIdx;
 let decoded = false;
 let guessCounter = 1;
 let hardMode = false;
+let secretCode = [0, 0, 0, 0, 0];
+let guessRow = [0, 0, 0, 0, 0];
+let marker = [];
 
 /*----- cached elements  -----*/
 const selEl = document.getElementById("selection");
@@ -36,7 +34,8 @@ const defeatBanner = document.getElementById("defeat");
 const oldGuessEl = document.getElementById("old-guess");
 const selectLevel = document.getElementById("level-selection");
 const setBtn = document.getElementById("set-btn");
-
+const guessedEls = document.querySelectorAll('div.old-guess > div');
+const markerEls = document.querySelectorAll('div.markers > div');
 
 /*----- event listeners -----*/
 function clickColours() {
@@ -54,6 +53,10 @@ setBtn.addEventListener("click", setLevel);
 
 /*----- functions -----*/
 
+// This function sets the hardMode variable based on the player input.
+// It is called when users click the 'Set' button.
+// As this happens just before play begins, it also hides the level selection banner,
+// reveals the guess row, and makes the guess row and colours clickable.
 function setLevel() {
     if (document.querySelector('input[name="level"]:checked').value === 'easy') {
         hardMode = false
@@ -67,7 +70,12 @@ function setLevel() {
     clickColours();
 }
 
-
+// This function sets the secret code by:
+// Checking the secretCode array for 0s
+// Generating a random number between 1-8 (inclusive)
+// Checking if the number is already included in the array
+// Finding the firt 0 in the array
+// Changing that 0 to the new random number
 function setSecretCode() {
     while (secretCode.includes(0)) {
         let random = (Math.floor(Math.random() * 8) + 1)
@@ -79,39 +87,13 @@ function setSecretCode() {
     }
 }
 
-
+// Setting the secretCode on start-up
 setSecretCode();
 
 
-function resetGame() {
-    guessRow = [0, 0, 0, 0, 0];
-    secretCode = [0, 0, 0, 0, 0];
-    resetGuessRowColours();
-    setSecretCode();
-    boardReset();
-    replayBtn.style.visibility = 'hidden';
-    winnerBanner.style.visibility = "hidden";
-    selectLevel.style.visibility = "visible";
-    guessCounter = 1;
-}
-
-
-function boardReset() {
-    const clearEls = document.querySelectorAll('div.old-guess > div');
-    const clearMarkerEls = document.querySelectorAll('div.markers > div');
-
-    clearEls.forEach((el) => {
-        el.removeAttribute("class");
-    }
-    )
-
-    clearMarkerEls.forEach((el) => {
-        el.removeAttribute("class");
-    }
-    )
-}
-
-
+// This function sets the colourInHand variable (used to set background colours)
+// and the comparitor variable (used for marking logic), based on the colour that
+// the player selects. The opening if statement keep the parent div from being selected.
 function colourSelect(evt) {
     if (evt.target.id === 'selection') {
         colourInHand = ''
@@ -138,6 +120,10 @@ function colourSelect(evt) {
     }
 }
 
+// This function takes the selected colour and changes the background colour of the guessRow 
+// space that the player clicks on. It also places the comparitor variable (set when the player
+// chose the colour) in the guessRow array. When that array no longer contains any 0s, the guess
+// button will appear. The colourInHand and comparitor variables are reset.
 function placeToken(evt) {
     const rowID = document.getElementById(evt.target.id);
     if (evt.target.id === "guess-row") {
@@ -168,6 +154,31 @@ function placeToken(evt) {
     comparitor = 0;
 }
 
+// When the player clicks the 'Guess' button, this function:
+// Compares the guessRow to the secretCode 
+// Checks for a winner
+// Checks for defeat
+// Fills the next row on the board and marks the guess
+// Hides the guess button
+// Adds 1 to the guessCounter
+// Resets the guessRow array and the guessRow colours
+function results() {
+    compareCodes()
+    winner()
+    defeat()
+    fillRow()
+    guessBtn.style.visibility = 'hidden';
+    guessCounter += 1;
+    guessRow = [0, 0, 0, 0, 0]
+    resetGuessRowColours()
+}
+
+
+// This function compares the guessRow and the secretCode and 
+// fills the marker array with a 1, 2, or 3 based on if each element
+// of the guessRow array is contained in the secretCode array, if the 
+// index of the mutually contained elements match or not, or if the element
+// is not there at all.
 function compareCodes() {
     guessRow.forEach((el, idx) => {
         if (secretCode.includes(el) && idx === secretCode.indexOf(el)) {
@@ -180,6 +191,45 @@ function compareCodes() {
     });
 }
 
+// This function checks to see if both the guessRow array and secretCode are
+// exactly alike. If so, it:
+// Displays the 'Replay' button
+// Makes the guessRow and colour selection row unclickable
+// Displays the winner banner
+// Hides the guess row
+// https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/ was helpful in
+// writing the comparison method.
+function winner() {
+    if (guessRow.toString() === secretCode.toString()) {
+        replayBtn.style.visibility = "visible";
+        selEl.removeEventListener("click", colourSelect);
+        guessEL.removeEventListener("click", placeToken);
+        winnerBanner.style.visibility = "visible";
+        guessEL.style.visibility = "hidden";
+    }
+}
+
+// This function checks for defeat (12 guesses and no solution)
+// If this is reached this funtion:
+// Displays the 'Replay' button
+// Makes the guessRow and colour selection row unclickable
+// Displays the winner banner
+// Hides the guess row
+function defeat() {
+    if (guessCounter === 12 && guessRow.toString() !== secretCode.toString()) {
+        replayBtn.style.visibility = "visible";
+        selEl.removeEventListener("click", colourSelect);
+        guessEL.removeEventListener("click", placeToken);
+        defeatBanner.style.visibility = "visible";
+        guessEL.style.visibility = "hidden";
+    }
+}
+
+// This function iterates through the guessRow array and fills the next line
+// on the board accordingly. It copies the colours of the tokens from the guessRow
+// to the corresponding position on the board (by setting div classes), and adds the markers based on the 
+// marker array that was filled with the compareCodes functions (again by setting div classes). 
+// If the player selected hard mode, then the marker array will be sorted first.
 function fillRow() {
     guessRow.forEach((el, idx) => {
         const guessTokenEl = document.getElementById(`OGT-${guessCounter}-${idx}`)
@@ -200,7 +250,8 @@ function fillRow() {
     }
 }
 
-
+// This function iterates through the guessRowIds array and
+// resets the background colour of each div
 function resetGuessRowColours() {
     guessRowIds.forEach((el) => {
         const guessRowEl = document.getElementById(`${el}`)
@@ -208,37 +259,53 @@ function resetGuessRowColours() {
     })
 }
 
-function winner() {
-    //https://www.freecodecamp.org/news/how-to-compare-arrays-in-javascript/
-    if (guessRow.toString() === secretCode.toString()) {
-        replayBtn.style.visibility = "visible";
-        selEl.removeEventListener("click", colourSelect);
-        guessEL.removeEventListener("click", placeToken);
-        winnerBanner.style.visibility = "visible";
-        guessEL.style.visibility = "hidden";
-    }
+// This function resets the game by:
+// Setting the secretCode array back to all 0s
+// Generating a new secretCode
+// Clearing the board of all previous guesses
+// Hiding the replay button
+// Hiding the Winner and Defeat banners
+// Revealing the level selection banner
+// Reseting the guessCounter to 1
+function resetGame() {
+    secretCode = [0, 0, 0, 0, 0];
+    setSecretCode();
+    resetBoard();
+    replayBtn.style.visibility = 'hidden';
+    winnerBanner.style.visibility = "hidden";
+    defeatBanner.style.visibility = "hidden";
+    selectLevel.style.visibility = "visible";
+    guessCounter = 1;
 }
 
-function defeat() {
-    if (guessCounter === 12 && guessRow.toString() !== secretCode.toString()) {
-        replayBtn.style.visibility = "visible";
-        selEl.removeEventListener("click", colourSelect);
-        guessEL.removeEventListener("click", placeToken);
-        defeatBanner.style.visibility = "visible";
-        guessEL.style.visibility = "hidden";
-    }
+// This function clears the board of all previous guesses by removing 
+// the classes asigned to the divs in the fillRow function.
+function resetBoard() {
+    guessedEls.forEach((el) => {
+        el.removeAttribute("class");
+    })
+
+    markerEls.forEach((el) => {
+        el.removeAttribute("class");
+    })
 }
 
 
-function results() {
-    winner()
-    compareCodes()
-    fillRow()
-    defeat()
-    guessBtn.style.visibility = 'hidden';
-    guessCounter += 1;
-    colourInHand = 0;
-    guessRow = [0, 0, 0, 0, 0]
-    resetGuessRowColours()
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
