@@ -27,7 +27,7 @@ Depending on how many attempts it takes to guess the sequence, different funny m
 
 ### **Getting Started**
 
-Playing is simple: the game can be found [here] (https://m4st3rm1nd.surge.sh/game.html)
+Playing is simple: the game can be found [here](https://m4st3rm1nd.surge.sh/game.html)
 Press play, pick a level, choose a colour, and start guessing!
 
 
